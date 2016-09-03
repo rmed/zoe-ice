@@ -89,6 +89,9 @@ class ICE:
 
             self.sendbus(self._feedback(imsg.ICE_SENT, user))
 
+            # Disable ICE
+            self._update_record(user, date=None, enabled=False)
+
     @Message(tags=['add-mails'])
     def add_mails(self, parser):
         """Add recipient email addresses for ICE message.
