@@ -25,9 +25,9 @@
 # SOFTWARE.
 
 from helper import messages as imsg
+from helper.rwlock import ReadWriteLock
 from os import environ as env
 from os.path import join as path
-from rwlock import RWLock
 from tinydb import TinyDB, Query
 from zoe.deco import Agent, Message, Timed
 from zoe.models.users import Users
@@ -39,7 +39,7 @@ gettext.install('ice')
 
 DB_PATH = path(env['ZOE_HOME'], 'etc', 'ice', 'db.json')
 RECORD = Query()
-LOCK = RWLock()
+LOCK = ReadWriteLock()
 
 LOCALEDIR = path(env['ZOE_HOME'], 'locale')
 ZOE_LOCALE = env.get('ZOE_LOCALE', 'en')
@@ -413,8 +413,9 @@ class ICE:
             `dict` with the user record.
         """
         # Try to obtain existing record
-        with LOCK.reader_lock:
-            record = self.db.get(RECORD.user == user)
+        LOCK.rlock()
+        record = self.db.get(RECORD.user == user)
+        LOCK.runlock()
 
         if record:
             return record
@@ -428,8 +429,9 @@ class ICE:
             'date': None
         }
 
-        with LOCK.writer_lock:
-            self.db.insert(record)
+        LOCK.lock()
+        self.db.insert(record)
+        LOCK.unlock()
 
         return record
 
@@ -472,7 +474,8 @@ class ICE:
         # Update info
         record.update(data)
 
-        with LOCK.writer_lock:
-            self.db.update(data, RECORD.user == user)
+        LOCK.lock()
+        self.db.update(data, RECORD.user == user)
+        LOCK.unlock()
 
         return record
