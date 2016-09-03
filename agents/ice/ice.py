@@ -63,7 +63,7 @@ class ICE:
 
         if not records:
             str_date = delta.strftime('%Y-%m-%d %H:%M:%S')
-            self.logger.info('No enabled ICE records at %s' % str_date)
+            print('[INFO] No enabled ICE records at %s' % str_date)
             return
 
         for record in records:

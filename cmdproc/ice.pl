@@ -122,49 +122,49 @@ sub get {
 
 # Add emails to ICE record
 sub add_mails {
-    print("message dst=ice&user=$user&src=$src&tag=add-mails&emails=@mails\n");
+    print("message dst=ice&user=$sender&src=$src&tag=add-mails&emails=@mails\n");
 }
 
 # Remove emails from ICE record
 sub rm_mails {
-    print("message dst=ice&user=$user&src=$src&tag=rm-mails&emails=@mails\n");
+    print("message dst=ice&user=$sender&src=$src&tag=rm-mails&emails=@mails\n");
 }
 
 # Enable an ICE delivery
 sub enable {
-    print("message dst=ice&user=$user&src=$src&tag=enable-ice\n");
+    print("message dst=ice&user=$sender&src=$src&tag=enable-ice\n");
 }
 
 # Disable an ICE delivery
 sub disable {
-    print("message dst=ice&user=$user&src=$src&tag=disable-ice\n");
+    print("message dst=ice&user=$sender&src=$src&tag=disable-ice\n");
 }
 
 # Get current ICE date
 sub get_date {
-    print("message dst=ice&user=$user&src=$src&tag=get-date\n");
+    print("message dst=ice&user=$sender&src=$src&tag=get-date\n");
 }
 
 # Set ICE date
 sub set_date {
-    print("message dst=ice&user=$user&src=$src&tag=set-date&date=$date\n");
+    print("message dst=ice&user=$sender&src=$src&tag=set-date&date=$date\n");
 }
 
 # Obtain current ICE message
 sub get_msg {
-    print("message dst=ice&user=$user&src=$src&tag=get-msg\n");
+    print("message dst=ice&user=$sender&src=$src&tag=get-msg\n");
 }
 
 # Set ICE message
 sub set_msg {
-    print("message dst=ice&user=$user&src=$src&tag=set-msg&message=$string\n");
+    print("message dst=ice&user=$sender&src=$src&tag=set-msg&message=$string\n");
 }
 
 # Get a summary of the ICE
 sub get_ice {
-    print("message dst=ice&user=$user&src=$src&tag=get-ice\n");
+    print("message dst=ice&user=$sender&src=$src&tag=get-ice\n");
 }
 
 sub test {
-    print("message dst=ice&user=$user&src=$src&tag=test-ice\n");
+    print("message dst=ice&user=$sender&src=$src&tag=test-ice\n");
 }
