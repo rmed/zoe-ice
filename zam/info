@@ -1,0 +1,7 @@
+agent = ice
+version = 0.1.0
+license = MIT
+maintainer = Rafael Medina García <rafamedgar@gmail.com>
+script = ice.py
+topics =
+description = Program delivery of messages in case of emergency
