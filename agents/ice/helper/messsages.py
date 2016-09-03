@@ -30,15 +30,21 @@ import gettext
 
 gettext.install('ice')
 
+# NOTE: Date is in the past
 DATE_INPAST = _('DATE_INPAST')
-DATE_INVALID = _('DATE_INVALID') # Invalid date format
+# NOTE: Date has invalid format
+DATE_INVALID = _('DATE_INVALID')
+# NOTE: Date is not set (when enabling ICE)
 DATE_NOTSET = _('DATE_NOTSET')
-DATE_SHOW = _('DATE_SHOW %s') # Date
+# NOTE: Token is current date
+DATE_SHOW = _('DATE_SHOW %s')
 DATE_UPDATED = _('DATE_UPDATED')
 ICE_DISABLED = _('ICE_DISABLED')
 ICE_ENABLED = _('ICE_ENABLED')
 ICE_SENT = _('ICE_SENT')
-INFO_RECORD = _('INFO_RECORD %s %s %s') # Mails, date, enabled
+# NOTE: Tokens are mails, date and if the ICE is enabled or not
+INFO_RECORD = _('INFO_RECORD %s %s %s')
 MAILS_UPDATED = _('MAILS_UPDATED')
-MSG_SHOW = _('MSG_SHOW %s') # Message
+# NOTE: Token is current message
+MSG_SHOW = _('MSG_SHOW %s')
 MSG_UPDATED = _('MSG_UPDATED')

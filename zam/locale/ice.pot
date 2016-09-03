@@ -1,0 +1,70 @@
+# Translations template for PROJECT.
+# Copyright (C) 2016 ORGANIZATION
+# This file is distributed under the same license as the PROJECT project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2016.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2016-09-03 13:16+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.3.4\n"
+
+#: agents/ice/helper/messsages.py:34
+msgid "DATE_INPAST"
+msgstr ""
+
+#: agents/ice/helper/messsages.py:36
+msgid "DATE_INVALID"
+msgstr ""
+
+#: agents/ice/helper/messsages.py:38
+msgid "DATE_NOTSET"
+msgstr ""
+
+#: agents/ice/helper/messsages.py:40
+#, python-format
+msgid "DATE_SHOW %s"
+msgstr ""
+
+#: agents/ice/helper/messsages.py:41
+msgid "DATE_UPDATED"
+msgstr ""
+
+#: agents/ice/helper/messsages.py:42
+msgid "ICE_DISABLED"
+msgstr ""
+
+#: agents/ice/helper/messsages.py:43
+msgid "ICE_ENABLED"
+msgstr ""
+
+#: agents/ice/helper/messsages.py:44
+msgid "ICE_SENT"
+msgstr ""
+
+#: agents/ice/helper/messsages.py:46
+#, python-format
+msgid "INFO_RECORD %s %s %s"
+msgstr ""
+
+#: agents/ice/helper/messsages.py:47
+msgid "MAILS_UPDATED"
+msgstr ""
+
+#: agents/ice/helper/messsages.py:49
+#, python-format
+msgid "MSG_SHOW %s"
+msgstr ""
+
+#: agents/ice/helper/messsages.py:50
+msgid "MSG_UPDATED"
+msgstr ""
+

@@ -1,0 +1,77 @@
+# English translations for PROJECT.
+# Copyright (C) 2016 ORGANIZATION
+# This file is distributed under the same license as the PROJECT project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2016.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2016-09-03 13:16+0200\n"
+"PO-Revision-Date: 2016-09-03 13:25+0200\n"
+"Language: en\n"
+"Language-Team: LL@li.org\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.3.4\n"
+"Last-Translator: Rafael Medina García <rafamedgar@gmail.com>\n"
+"X-Generator: Poedit 1.8.8\n"
+
+#: agents/ice/helper/messsages.py:34
+msgid "DATE_INPAST"
+msgstr "The date specified is in the past"
+
+#: agents/ice/helper/messsages.py:36
+msgid "DATE_INVALID"
+msgstr "The date specified is not valid (format should be YYYY-MM-DD)"
+
+#: agents/ice/helper/messsages.py:38
+msgid "DATE_NOTSET"
+msgstr "Date has not been set"
+
+#: agents/ice/helper/messsages.py:40
+#, python-format
+msgid "DATE_SHOW %s"
+msgstr "Configured date: %s"
+
+#: agents/ice/helper/messsages.py:41
+msgid "DATE_UPDATED"
+msgstr "Date has been updated"
+
+#: agents/ice/helper/messsages.py:42
+msgid "ICE_DISABLED"
+msgstr "ICE is disabled"
+
+#: agents/ice/helper/messsages.py:43
+msgid "ICE_ENABLED"
+msgstr "ICE is enabled"
+
+#: agents/ice/helper/messsages.py:44
+msgid "ICE_SENT"
+msgstr "Your ICE message has been sent"
+
+#: agents/ice/helper/messsages.py:46
+#, python-format
+msgid "INFO_RECORD %s %s %s"
+msgstr ""
+"Emails: %s\n"
+"Date: %s\n"
+"%s"
+
+#: agents/ice/helper/messsages.py:47
+msgid "MAILS_UPDATED"
+msgstr "Emails have been updated"
+
+#: agents/ice/helper/messsages.py:49
+#, python-format
+msgid "MSG_SHOW %s"
+msgstr ""
+"Current message:\n"
+"\n"
+"%s"
+
+#: agents/ice/helper/messsages.py:50
+msgid "MSG_UPDATED"
+msgstr "Your ICE message has been updated"
