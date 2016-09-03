@@ -72,11 +72,13 @@ class ICE:
 
             self._set_locale(user)
 
+            print('[INFO] Processing ICE message for %s' % user)
+
             try:
                 converted = datetime.datetime.strptime(date, '%Y-%m-%d')
 
             except ValueError:
-                self.sendbus(self._feedback(_(m.DATE_INVALID), user))
+                self.sendbus(self._feedback(_(m.DATE_INVALID), user).msg())
                 continue
 
             # Skip future
@@ -87,9 +89,9 @@ class ICE:
             emails = record['emails']
 
             for mail in emails:
-                self.sendbus(self._feedback(msg, mail, 'mail', 'Zoe ICE'))
+                self.sendbus(self._feedback(msg, mail, 'mail', 'Zoe ICE').msg())
 
-            self.sendbus(self._feedback(_(m.ICE_SENT), user))
+            self.sendbus(self._feedback(_(m.ICE_SENT), user).msg())
 
             # Disable ICE
             self._update_record(user, date='', enabled=False)
