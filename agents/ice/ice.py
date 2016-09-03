@@ -58,7 +58,7 @@ class ICE:
         Once sent to every email, the ICE record is disabled.
         """
         # Obtain all enabled ICEs
-        delta = datetime.datetime.utcnow()
+        delta = datetime.datetime.now()
         records = self.db.search(RECORD.enabled == True)
 
         if not records:
@@ -175,7 +175,7 @@ class ICE:
         except ValueError:
             return self._feedback(_(m.DATE_INVALID), user, src)
 
-        if converted <= datetime.datetime.utcnow():
+        if converted <= datetime.datetime.now():
             return self._feedback(_(m.DATE_INPAST), user, src)
 
         # Enable
@@ -316,7 +316,7 @@ class ICE:
         except ValueError:
             return self._feedback(_(m.DATE_INVALID), user, src)
 
-        if converted <= datetime.datetime.utcnow():
+        if converted <= datetime.datetime.now():
             return self._feedback(_(m.DATE_INPAST), user, src)
 
         # Store date
