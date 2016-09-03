@@ -24,7 +24,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-from helper import messages as imsg
+from helper import messages as m
 from helper.rwlock import ReadWriteLock
 from os import environ as env
 from os.path import join as path
@@ -70,11 +70,13 @@ class ICE:
             user = record['user']
             date = record['date']
 
+            self._set_locale(user)
+
             try:
                 converted = datetime.datetime.strptime(date, '%Y-%m-%d')
 
             except ValueError:
-                self.sendbus(self._feedback(imsg.DATE_INVALID, user))
+                self.sendbus(self._feedback(_(m.DATE_INVALID), user))
                 continue
 
             # Skip future
@@ -87,10 +89,10 @@ class ICE:
             for mail in emails:
                 self.sendbus(self._feedback(msg, mail, 'mail', 'Zoe ICE'))
 
-            self.sendbus(self._feedback(imsg.ICE_SENT, user))
+            self.sendbus(self._feedback(_(m.ICE_SENT), user))
 
             # Disable ICE
-            self._update_record(user, date=None, enabled=False)
+            self._update_record(user, date='', enabled=False)
 
     @Message(tags=['add-mails'])
     def add_mails(self, parser):
@@ -112,12 +114,14 @@ class ICE:
         self._set_locale(user)
 
         # Add mails
+        emails = emails.split(' ')
+
         record = self._get_record(user)
         new_emails = list(set(record['emails']) | set(emails))
 
         self._update_record(user, emails=new_emails)
 
-        return self._feedback(imsg.MAILS_UPDATED, user, src)
+        return self._feedback(_(m.MAILS_UPDATED), user, src)
 
     @Message(tags=['disable-ice'])
     def disable_ice(self, parser):
@@ -141,7 +145,7 @@ class ICE:
         # Disable
         self._update_record(user, enabled=False)
 
-        return self._feedback(imsg.ICE_DISABLED, user, src)
+        return self._feedback(_(m.ICE_DISABLED), user, src)
 
     @Message(tags=['enable-ice'])
     def enable_ice(self, parser):
@@ -169,15 +173,15 @@ class ICE:
             converted = datetime.datetime.strptime(record['date'], '%Y-%m-%d')
 
         except ValueError:
-            return self._feedback(imsg.DATE_INVALID, user, src)
+            return self._feedback(_(m.DATE_INVALID), user, src)
 
         if converted <= datetime.datetime.utcnow():
-            return self._feedback(imsg.DATE_INPAST, user, src)
+            return self._feedback(_(m.DATE_INPAST), user, src)
 
         # Enable
         self._update_record(user, enabled=True)
 
-        return self._feedback(imsg.ICE_ENABLED, user, src)
+        return self._feedback(_(m.ICE_ENABLED), user, src)
 
     @Message(tags=['get-date'])
     def get_date(self, parser):
@@ -198,9 +202,9 @@ class ICE:
 
         # Get user record
         record = self._get_record(user)
-        date = record['date'] or imsg.DATE_NOTSET
+        date = record['date'] or _(m.DATE_NOTSET)
 
-        return self._feedback(imsg.DATE_SHOW % date, user, src)
+        return self._feedback(_(m.DATE_SHOW) % date, user, src)
 
     @Message(tags=['get-ice'])
     def get_ice(self, parser):
@@ -222,12 +226,12 @@ class ICE:
         # Get user record
         record = self._get_record(user)
 
-        emails = record['emails'].join(', ')
-        date = record['date'] or imsg.DATE_NOTSET
-        enabled = imsg.ICE_ENABLED if record['enabled'] else imsg.ICE_DISABLED
+        emails = (', ').join(record['emails'])
+        date = record['date'] or _(m.DATE_NOTSET)
+        enabled = _(m.ICE_ENABLED) if record['enabled'] else _(m.ICE_DISABLED)
 
         return self._feedback(
-            imsg.INFO_RECORD % (emails, date, enabled),
+            _(m.INFO_RECORD) % (emails, date, enabled),
             user,
             src
         )
@@ -252,7 +256,7 @@ class ICE:
         # Get user record
         record = self._get_record(user)
 
-        return self._feedback(imsg.MSG_SHOW % record['message'], user, src)
+        return self._feedback(_(m.MSG_SHOW) % record['message'], user, src)
 
     @Message(tags=['rm-mails'])
     def rm_mails(self, parser):
@@ -274,12 +278,15 @@ class ICE:
         self._set_locale(user)
 
         # Remove mails
+        emails = emails.split(' ')
+
         record = self._get_record(user)
         new_emails = list(set(record['emails']) - set(emails))
+        print(new_emails)
 
         self._update_record(user, emails=new_emails)
 
-        return self._feedback(imsg.MAILS_UPDATED, user, src)
+        return self._feedback(_(m.MAILS_UPDATED), user, src)
 
     @Message(tags=['set-date'])
     def set_date(self, parser):
@@ -307,15 +314,15 @@ class ICE:
             converted = datetime.datetime.strptime(date, '%Y-%m-%d')
 
         except ValueError:
-            return self._feedback(imsg.DATE_INVALID, user, src)
+            return self._feedback(_(m.DATE_INVALID), user, src)
 
         if converted <= datetime.datetime.utcnow():
-            return self._feedback(imsg.DATE_INPAST, user, src)
+            return self._feedback(_(m.DATE_INPAST), user, src)
 
         # Store date
         self._update_record(user, date=date)
 
-        return self._feedback(imsg.DATE_UPDATED, user, src)
+        return self._feedback(_(m.DATE_UPDATED), user, src)
 
     @Message(tags=['set-msg'])
     def set_message(self, parser):
@@ -341,7 +348,7 @@ class ICE:
         # Update user record
         self._update_record(user, message=message)
 
-        return self._feedback(imsg.MSG_UPDATED, user, src)
+        return self._feedback(_(m.MSG_UPDATED), user, src)
 
     @Message(tags=['test-ice'])
     def test_ice(self, parser):
@@ -391,6 +398,8 @@ class ICE:
         else:
             relayto = dst
 
+        to_send['relayto'] = relayto
+
         if relayto == 'mail':
             to_send['subject'] = subject or 'Zoe ICE'
             to_send['txt'] = message
@@ -422,11 +431,11 @@ class ICE:
 
         # Create new record
         record = {
-            'name': user,
+            'user': user,
             'emails': [],
             'message': '',
             'enabled': False,
-            'date': None
+            'date': ''
         }
 
         LOCK.lock()

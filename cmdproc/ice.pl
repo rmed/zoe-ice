@@ -92,7 +92,7 @@ if ($get) {
 }
 
 sub get {
-    if ($locale and ($locale eq "es")) {
+    # if ($locale and ($locale eq "es")) {
         # Spanish
 		print("--am añade correos/mails ice/ICE <mail>\n");
 		print("--rm elimina/quita correos/mails ice/ICE <mail>\n");
@@ -105,7 +105,7 @@ sub get {
 		print("--gi dame/muestra /un resumen /del ice/ICE\n");
 		print("--t probar/prueba /mi ice/ICE\n");
 
-    } else {
+    # } else {
         # English (default)
 		print("--am add ice/ICE mails <mail>\n");
 		print("--rm remove ice/ICE mails <mail>\n");
@@ -117,7 +117,7 @@ sub get {
 		print("--sm set ice/ICE message to <string>\n");
 		print("--gi show /me ice/ICE /summary\n");
 		print("--t test /my ice/ICE\n");
-    }
+    # }
 }
 
 # Add emails to ICE record
